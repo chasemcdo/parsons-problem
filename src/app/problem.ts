@@ -7,7 +7,7 @@ export const lines = [
         "type": "user-defined-variable"
       },
       {
-        "text": " = ",
+        "text": "=",
         "type": "operator"
       },
       {
@@ -27,7 +27,7 @@ export const lines = [
         "type": "user-defined-variable"
       },
       {
-        "text": " < ",
+        "text": "<",
         "type": "operator"
       },
       {
@@ -67,7 +67,7 @@ export const lines = [
         "type": "user-defined-variable"
       },
       {
-        "text": " = ",
+        "text": "=",
         "type": "operator"
       },
       {
@@ -75,7 +75,7 @@ export const lines = [
         "type": "user-defined-variable"
       },
       {
-        "text": " + ",
+        "text": "+",
         "type": "operator"
       },
       {
