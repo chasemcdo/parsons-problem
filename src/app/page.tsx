@@ -10,22 +10,38 @@ export default function Home() {
     document.querySelectorAll('#parentDiv'), {
       draggable: 'p',
     })
-    sortable.on('sortable:start', () => {
-      console.log('sortable:start')
-    })
-    sortable.on('sortable:sort', () => {
-      console.log('sortable:sort')
-    })
-    sortable.on('sortable:sorted', () => {
-      console.log('sortable:sorted')
-    })
+
     sortable.on('sortable:stop', () => {
-      console.log('sortable:stop')
+      checkCorrectness()
     })
   })
 
+  function checkCorrectness() {
+    const parentDivs = document.querySelectorAll('#parentDiv');
+    const solution = `count = N 
+while count < N : 
+print ( N ) 
+count = count + N 
+`;
+
+    let currentSolution = "";
+    parentDivs.forEach(row => {
+      row.childNodes.forEach(cell => {
+        if (!(cell.classList.contains("draggable-mirror") || cell.classList.contains("draggable--original"))) {
+          currentSolution = currentSolution.concat(cell.textContent || "N", " ")
+        }
+      })
+      currentSolution = currentSolution.concat("\n")
+    })
+
+    console.log(currentSolution)
+    console.log(solution)
+    console.log(currentSolution == solution)
+  }
+
   return (
-    <main className="flex flex-col min-h-screen items-center justify-center">
+    <main className="flex flex-col min-h-screen items-center p-24 gap-10">
+      <h1>Rearrange the following code blocks such that it prints out each number, starting from the initial assignment.</h1>
       <div className="flex flex-col">
         {lines.map((line, index) => (
           <div id="parentDiv" key={`line ${index}`} className="flex flex-row">
