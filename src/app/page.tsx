@@ -34,9 +34,12 @@ count = count + N
       currentSolution = currentSolution.concat("\n")
     })
 
-    console.log(currentSolution)
-    console.log(solution)
-    console.log(currentSolution == solution)
+    const successBanner = document.querySelector('#successBanner');
+    if (currentSolution == solution) {
+      successBanner?.classList.remove("invisible");
+    } else if (!successBanner?.classList.contains("invisible")) {
+      successBanner?.classList.add("invisible");
+    }
   }
 
   return (
@@ -57,6 +60,10 @@ count = count + N
             ))}
           </div>
         ))}
+      </div>
+      <div id="successBanner" className="bg-green-500 flex rounded-lg p-2 invisible">
+        <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        <span>Your solution is correct!</span>
       </div>
     </main>
   )
