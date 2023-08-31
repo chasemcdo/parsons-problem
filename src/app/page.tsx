@@ -2,13 +2,14 @@
 
 import { lines } from "./problem";
 import { Sortable } from '@shopify/draggable';
-import { useEffect } from "react";
+import React, { MouseEvent, useEffect } from "react";
 
 export default function Home() {
   useEffect(() => {
     const sortable = new Sortable(
     document.querySelectorAll('#parentDiv'), {
       draggable: 'p',
+      handle: '.handle'
     })
 
     sortable.on('sortable:stop', () => {
@@ -61,6 +62,25 @@ while count < N :
     checkCorrectness();
   }
 
+  function userInput() {
+    return (
+      <p className="flex flex-row cursor-pointer bg-gray-800 text-white border-gray-600 hover:bg-gray-700 hover:border-gray-600 focus:ring-gray-700 focus:outline-none focus:ring-4 font-medium rounded-lg text-sm px-3 py-2.5 mr-2 mb-2 gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 handle">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+        <input className="bg-gray-800 text-white border border-gray-600 rounded-lg text-center"></input>
+      </p>
+    )
+  }
+
+  function textInput(text: string | undefined) {
+    return (
+      <p className="handle cursor-pointer bg-gray-800 text-white border-gray-600 hover:bg-gray-700 hover:border-gray-600 focus:ring-gray-700 focus:outline-none focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">
+        {text}
+      </p>
+    )
+  }
+
   return (
     <main className="flex flex-col min-h-screen items-center p-24 gap-10">
       <h1>Rearrange the following code blocks such that it prints out each number, starting from the initial value assigned.</h1>
@@ -77,16 +97,7 @@ while count < N :
             </button>
             <a id={`indent_${index}`} className="invisible hidden solution-ignore">\t</a>
 
-            {line.tokens.map((token, index) => (
-              <p key={`token ${index}`} className="cursor-pointer bg-gray-800 text-white border-gray-600 hover:bg-gray-700 hover:border-gray-600 focus:ring-gray-700 focus:outline-none focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">
-                {
-                  token.type == "input" ?
-                    <input className="bg-gray-800 text-white border border-gray-600 rounded-lg text-center"></input>
-                    :
-                    token.text
-                }
-              </p>
-            ))}
+            { line.tokens.map((token) => ( token.type == "input" ? userInput() : textInput(token.text) )) }
           </div>
         ))}
       </div>
