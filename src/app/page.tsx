@@ -2,7 +2,7 @@
 
 import { lines } from "./problem";
 import { Sortable } from '@shopify/draggable';
-import React, { MouseEvent, useEffect } from "react";
+import React, { useEffect } from "react";
 
 export default function Home() {
   useEffect(() => {
@@ -84,7 +84,7 @@ while count < N :
   return (
     <main className="flex flex-col min-h-screen items-center p-24 gap-10">
       <h1>Rearrange the following code blocks such that it prints out each number, starting from the initial value assigned.</h1>
-      <div className="flex flex-col">
+      <div id="parsonProblem" className="flex flex-col">
         {lines.map((line, index) => (
           <div id="parentDiv" key={`line ${index}`} className="flex flex-row">
             <button onClick={() => toggleIndent(index)} id={`indent ${index}`} className="cursor-pointer text-white hover:text-slate-500 px-5 py-2.5 mr-2 mb-2 solution-ignore">
