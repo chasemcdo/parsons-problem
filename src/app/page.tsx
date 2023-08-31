@@ -1,21 +1,28 @@
 'use client'
 
 import { lines } from "./problem";
-import { Sortable } from '@shopify/draggable';
 import React, { useEffect } from "react";
 
 export default function Home() {
   useEffect(() => {
-    const sortable = new Sortable(
-    document.querySelectorAll('#parentDiv'), {
-      draggable: 'p',
-      handle: '.handle'
-    })
+    if (typeof window !== "undefined") {
+      import("@shopify/draggable").then((draggableModule) => {
+        const Sortable = draggableModule.Sortable;
 
-    sortable.on('sortable:stop', () => {
-      checkCorrectness()
-    })
-  })
+        const sortable = new Sortable(
+          document.querySelectorAll("#parentDiv"),
+          {
+            draggable: "p",
+            handle: ".handle",
+          }
+        );
+
+        sortable.on("sortable:stop", () => {
+          checkCorrectness();
+        });
+      });
+    }
+  }, []);
 
   function checkCorrectness() {
     const parentDivs = document.querySelectorAll('#parentDiv');
