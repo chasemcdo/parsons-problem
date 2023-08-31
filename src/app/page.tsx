@@ -62,9 +62,9 @@ while count < N :
     checkCorrectness();
   }
 
-  function userInput() {
+  function userInput(index: number) {
     return (
-      <p className="flex flex-row cursor-pointer bg-gray-800 text-white border-gray-600 hover:bg-gray-700 hover:border-gray-600 focus:ring-gray-700 focus:outline-none focus:ring-4 font-medium rounded-lg text-sm px-3 py-2.5 mr-2 mb-2 gap-2">
+      <p id={`token_${index}`} className="flex flex-row cursor-pointer bg-gray-800 text-white border-gray-600 hover:bg-gray-700 hover:border-gray-600 focus:ring-gray-700 focus:outline-none focus:ring-4 font-medium rounded-lg text-sm px-3 py-2.5 mr-2 mb-2 gap-2">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 handle">
           <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
         </svg>
@@ -73,9 +73,9 @@ while count < N :
     )
   }
 
-  function textInput(text: string | undefined) {
+  function textInput(index: number, text: string | undefined) {
     return (
-      <p className="handle cursor-pointer bg-gray-800 text-white border-gray-600 hover:bg-gray-700 hover:border-gray-600 focus:ring-gray-700 focus:outline-none focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">
+      <p id={`token_${index}`} className="handle cursor-pointer bg-gray-800 text-white border-gray-600 hover:bg-gray-700 hover:border-gray-600 focus:ring-gray-700 focus:outline-none focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">
         {text}
       </p>
     )
@@ -97,7 +97,7 @@ while count < N :
             </button>
             <a id={`indent_${index}`} className="invisible hidden solution-ignore">\t</a>
 
-            { line.tokens.map((token) => ( token.type == "input" ? userInput() : textInput(token.text) )) }
+            { line.tokens.map((token) => ( token.type == "input" ? userInput(index) : textInput(index, token.text) )) }
           </div>
         ))}
       </div>
