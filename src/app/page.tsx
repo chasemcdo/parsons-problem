@@ -4,6 +4,8 @@ import { lines } from "./problem";
 import React, { useEffect } from "react";
 
 export default function Home() {
+  const start = new Date().getTime();;
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       import("@shopify/draggable").then((draggableModule) => {
@@ -45,6 +47,7 @@ while count < N :
     const successBanner = document.querySelector('#successBanner');
     if (currentSolution == solution) {
       successBanner?.classList.remove("invisible");
+      setTimeTaken();
     } else if (!successBanner?.classList.contains("invisible")) {
       successBanner?.classList.add("invisible");
     }
@@ -67,6 +70,19 @@ while count < N :
       right_arrow?.classList.remove("hidden");
     }
     checkCorrectness();
+  }
+
+  function setTimeTaken() {
+    const timeDisplay = document.querySelector(`#time`);
+    const duration = (new Date().getTime() - start)
+
+    const seconds = Math.floor((duration / 1000) % 60),
+    minutes = Math.floor((duration / (1000 * 60)) % 60),
+    hours = Math.floor(duration / (1000 * 60 * 60));
+
+    if (timeDisplay) {
+      timeDisplay.textContent = `${hours}:${minutes}:${seconds}`
+    }
   }
 
   function userInput(index: number) {
@@ -110,7 +126,7 @@ while count < N :
       </div>
       <div id="successBanner" className="bg-green-500 flex rounded-lg p-2 invisible">
         <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-        <span>Your solution is correct!</span>
+        <span>Your solution is correct! It took <strong id="time">0:0:0</strong> for you to finish.</span>
       </div>
     </main>
   )
