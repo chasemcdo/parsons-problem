@@ -44,14 +44,21 @@ while count < N :
 
   function toggleIndent(line:number) {
     const indent = document.querySelector(`#indent_${line}`);
+    const left_arrow = document.querySelector(`#left_arrow_${line}`);
+    const right_arrow = document.querySelector(`#right_arrow_${line}`);
+
     if (indent?.classList.contains("hidden")) {
       indent?.classList.remove("hidden");
       indent?.classList.remove("solution-ignore");
+      left_arrow?.classList.remove("hidden");
+      right_arrow?.classList.add("hidden");
     } else {
       indent?.classList.add("hidden");
       indent?.classList.add("solution-ignore");
+      left_arrow?.classList.add("hidden");
+      right_arrow?.classList.remove("hidden");
     }
-    checkCorrectness()
+    checkCorrectness();
   }
 
   return (
@@ -61,8 +68,11 @@ while count < N :
         {lines.map((line, index) => (
           <div id="parentDiv" key={`line ${index}`} className="flex flex-row">
             <button value={index} onClick={() => toggleIndent(index)} id={`indent ${index}`} className="cursor-pointer text-white hover:text-slate-500 px-5 py-2.5 mr-2 mb-2 solution-ignore">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+              <svg id={`right_arrow_${index}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+              </svg>
+              <svg id={`left_arrow_${index}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 hidden">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
               </svg>
             </button>
             <p id={`indent_${index}`} className="invisible hidden solution-ignore">\t</p>
