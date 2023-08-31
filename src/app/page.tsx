@@ -27,7 +27,7 @@ while count < N :
 
     let currentSolution = "";
     parentDivs.forEach(row => {
-      row.childNodes.forEach(cell => {
+      Array.from(row.children).forEach(cell => {
         if (!(cell.classList.contains("draggable-mirror") || cell.classList.contains("draggable--original") || cell.classList.contains("solution-ignore"))) {
           currentSolution = currentSolution.concat(cell.textContent || "N", " ")
         }
