@@ -75,7 +75,7 @@ while count < N :
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
               </svg>
             </button>
-            <p id={`indent_${index}`} className="invisible hidden solution-ignore">\t</p>
+            <a id={`indent_${index}`} className="invisible hidden solution-ignore">\t</a>
 
             {line.tokens.map((token, index) => (
               <p key={`token ${index}`} className="cursor-pointer bg-gray-800 text-white border-gray-600 hover:bg-gray-700 hover:border-gray-600 focus:ring-gray-700 focus:outline-none focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">
